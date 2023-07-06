@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.br.joel.pagamentos.DTO.PagamentoDTO;
 import com.br.joel.pagamentos.services.PagamentoService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/pagamentos")
 public class PagamentoContoller {
@@ -35,18 +37,18 @@ public class PagamentoContoller {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PagamentoDTO> getById( @PathVariable Long id) {
+    public ResponseEntity<PagamentoDTO> getById( @Valid @PathVariable Long id) {
         return ResponseEntity.ok(pagamentoService.findById(id));
     }   
 
     @PostMapping
-    public ResponseEntity<PagamentoDTO> create(@RequestBody PagamentoDTO pagamentoDTO) {
+    public ResponseEntity<PagamentoDTO> create( @Valid @RequestBody PagamentoDTO pagamentoDTO) {
         return ResponseEntity.ok(pagamentoService.save(pagamentoDTO));
     
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PagamentoDTO> update(@PathVariable Long id, @RequestBody PagamentoDTO pagamentoDTO) {
+    public ResponseEntity<PagamentoDTO> update(@Valid @PathVariable Long id, @RequestBody PagamentoDTO pagamentoDTO) {
         return ResponseEntity.ok(pagamentoService.update(id, pagamentoDTO));
     }
 
